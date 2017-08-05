@@ -14,14 +14,21 @@ class PostsNew extends Component {
           type="text"
           {...field.input}
         />
-      {field.meta.error}
+        {field.meta.touched ? field.meta.error : ''}
       </div>
     );
   }
 
+  onSubmit(values) {
+    // this === components
+    console.log(values);
+  }
+
   render() {
+    const { handleSubmit } = this.props;
+
     return (
-      <form>
+      <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
         <Field
           label="Title"
           name="title"
@@ -38,6 +45,7 @@ class PostsNew extends Component {
           name="content"
           component={this.renderField}
         />
+        <button type="submit" className="btn btn-primary">Submit</button>
       </form>
     );
   }
@@ -53,7 +61,7 @@ function validate(values) {
     errors.title = "Enter a title";
   }
   if (values.title && values.title.length < TITLE_MIN) {
-    errors.title = `${TITLE_MIN-values.title.length} characters left!`;
+    errors.title = `${TITLE_MIN - values.title.length} characters left!`;
   }
   if (!values.categories) {
     errors.categories = 'Enter some categories';
