@@ -11,7 +11,7 @@ describe('App', () => {
     const component = renderComponent(App);
 
     // Use 'expect' to make an 'assertion' about a target
-    expect(component).to.contain('React simple starter');
+    expect(component).to.contain('First test');
 
   }); 
 
